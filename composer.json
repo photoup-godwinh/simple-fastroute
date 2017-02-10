@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "SimplePHP\\FastRoute": "src"
+            "SimplePHP\\FastRoute\\": "src"
         }
     }
 }
