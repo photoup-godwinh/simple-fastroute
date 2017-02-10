@@ -100,7 +100,7 @@ class Router {
                 $param = $route_info[2];
 
                 if($route->hasMiddlewares()) {
-                	$layer = new MiddlewareLayer($route->getMiddlewares());
+                	$layer = new Layer($route->getMiddlewares());
 
                 	$response = $layer->handle($this->request, function(Request $request) use ($container, $controller, $param) {
 			                        return $container->call($controller, $param);
