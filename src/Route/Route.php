@@ -62,7 +62,7 @@ class Route {
 	}
 
 	public function hasMiddlewares() {
-		return count($this->middlewares);
+		return count($this->middlewares) > 0;
 	}
 
 	public function setGroup($group) {
