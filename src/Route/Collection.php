@@ -38,23 +38,27 @@ class Collection {
 	}
 
 	private function buildMatchablePattern($parsed) {
-		$pattern = '';
+		$patterns = [];
 
 		if(is_array($parsed)) {
-			$parts = $parsed[0];
+			foreach($parsed as $p) {
+				$pattern = '';
 
-			for($i = 0; $i < count($parts); $i++) {
-				if(is_array($parts[$i])) {
-					$pattern .= $parts[$i][1];
-				} else {
-					$pattern .= $parts[$i];
+				foreach($p as $r) {
+					if(is_array($r)) {
+						$pattern .= $r[1];
+					} else {
+						$pattern .= $r;
+					}
 				}
-			}
 
-			$pattern = '~^(' . $pattern . ')$~';
+				$patterns[] = '(' . $pattern . ')';
+			}
 		}
 
-		return $pattern;
+		if($patterns) $patterns = '~^' . implode('|', $patterns) . '$~';
+
+		return $patterns;
 	}
 
 	public function size() {
