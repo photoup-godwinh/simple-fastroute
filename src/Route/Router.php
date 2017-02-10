@@ -68,7 +68,7 @@ class Router {
 			}
 		});
 
-		$this->dispatch($container);
+		return $this->dispatch($container);
 	}
 
 	public function setMiddlewareNs($middleware_ns) {
@@ -99,20 +99,21 @@ class Router {
                 $controller = $route_info[1];
                 $param = $route_info[2];
 
+                if(!$route) {
+                	throw new \Exception('No Route matches in collection');
+                }
+
                 if($route->hasMiddlewares()) {
                 	$layer = new Layer($route->getMiddlewares());
 
-                	$response = $layer->handle($this->request, function(Request $request) use ($container, $controller, $param) {
-			                        return $container->call($controller, $param);
-
-			                    });
+                	return $layer->handle($this->request, function(Request $request) use ($container, $controller, $param) {
+                        return $container->call($controller, $param);
+                    });
                 } else {
                 	# removed support for closure as of 2017-02-09
 					
 					return $container->call($controller, $param);
                 }
-                
-                return $response;
             break;
         }
 	}
