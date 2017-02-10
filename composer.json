@@ -1,0 +1,20 @@
+{
+    "name": "godwinh/simple-fastroute",
+    "description": "Simple fast route wrapper with middleware integration",
+    "require": {
+        "nikic/fast-route": "^1.2",
+        "symfony/http-foundation": "^2.8",
+        "php-di/php-di": "^5.4"
+    },
+    "authors": [
+        {
+            "name": "Godwinh Lopez",
+            "email": "godwinh@photoup.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SimplePHP\\FastRoute": "src"
+        }
+    },
+}
