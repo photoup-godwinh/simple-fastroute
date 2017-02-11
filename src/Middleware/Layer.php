@@ -2,15 +2,23 @@
 namespace SimplePHP\SimpleFastRoute\Middleware;
 
 use Closure;
+use DI\Container;
 use Symfony\Component\HttpFoundation\Request;
 
 class Layer {
     private $layers;
 
-    public function __construct(array $layers = array()) {
-        $this->layers = $layers;
+    public function __construct(Container $container, array $layers = array()) {
+        $this->layers = [];
+
+        foreach($layers as $layer) {
+            $this->layers[] = $container->get($layer);
+        }
     }
     
+    /*
+     * @deprecated 
+    */
     public function layer($layers) {
         if ($layers instanceof Layer) {
             $layers = $layers->toArray();
@@ -25,7 +33,7 @@ class Layer {
         }
         
         return new static(array_merge($this->layers, $layers));
-    }
+    } */
 
     public function handle(Request $request, Closure $core) {
         $core_func = $this->createCoreFunc($core);

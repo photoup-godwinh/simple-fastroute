@@ -104,7 +104,7 @@ class Router {
                 }
 
                 if($route->hasMiddlewares()) {
-                	$layer = new Layer($route->getMiddlewares());
+                	$layer = new Layer($container, $route->getMiddlewares());
 
                 	return $layer->handle($this->request, function(Request $request) use ($container, $controller, $param) {
                         return $container->call($controller, $param);
@@ -127,7 +127,8 @@ class Router {
 			$class .= ucfirst($middleware);
 
 			if(class_exists($class)) {
-				$new_middlewares[] = new $class;
+				// $new_middlewares[] = new $class;
+				$new_middlewares[] = $class;
 			}
 		}
 
