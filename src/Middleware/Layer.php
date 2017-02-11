@@ -33,7 +33,7 @@ class Layer {
         }
         
         return new static(array_merge($this->layers, $layers));
-    } */
+    } 
 
     public function handle(Request $request, Closure $core) {
         $core_func = $this->createCoreFunc($core);
