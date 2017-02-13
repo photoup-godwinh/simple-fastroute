@@ -66,6 +66,8 @@ class Collection {
 			}
 
 			$new_pattern .= '$~';
+			
+			$patterns = $new_pattern;
 			// $patterns = '~^' . implode('|', $patterns) . '$~';
 		} 
 
