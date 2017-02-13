@@ -56,7 +56,18 @@ class Collection {
 			}
 		}
 
-		if($patterns) $patterns = '~^' . implode('|', $patterns) . '$~';
+		if($patterns) {
+			$new_pattern = '~^';
+
+			if(count($patterns) > 1) {
+				$new_pattern .= '(' . implode('|', $patterns) . ')';
+			} else {
+				$new_pattern .= implode('|', $patterns);
+			}
+
+			$new_pattern .= '$~';
+			// $patterns = '~^' . implode('|', $patterns) . '$~';
+		} 
 
 		return $patterns;
 	}
