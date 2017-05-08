@@ -32,6 +32,7 @@ class Router {
 	public function __call($name, $args) {
 		$method 	= strtoupper($name); 
 		$pattern 	= empty($this->group_name) ? $args[0] : ('/' . $this->group_name . $args[0]);
+		$pattern 	= rtrim($pattern, '/');
 		$handler 	= $args[1];
 		$route 		= new Route($method, $pattern, $handler);
 
