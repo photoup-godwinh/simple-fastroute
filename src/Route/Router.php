@@ -101,7 +101,7 @@ class Router {
                 $param = $route_info[2];
 
                 if(!$route) {
-                	throw new \Exception('No Route matches in collection');
+                	throw new RouteNotAllowedException('No Route matches in collection');
                 }
 
                 if($route->hasMiddlewares()) {
